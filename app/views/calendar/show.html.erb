@@ -1,0 +1,153 @@
+<div class="my-3 my-md-5">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">
+        Salles de réunions - <%= @building.name %>
+      </h1>
+    </div>
+    <div class="row row-cards">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+          <div class="rooms">
+            <% @rooms.each do |room| %>
+              <% if room.color == 'black' %>
+                <span class="tag tag-gray-dark"><%= room.name %></span>
+              <% end %>
+              <% if room.color == 'green' %>
+                <span class="tag tag-green"><%= room.name %></span>
+              <% end %>
+              <% if room.color == 'red' %>
+                <span class="tag tag-danger"><%= room.name %></span>
+              <% end %>
+              <% if room.color == 'orange' %>
+                <span class="tag tag-warning"><%= room.name %></span>
+              <% end %>
+              <% if room.color == 'blue' %>
+                <span class="tag tag-blue"><%= room.name %></span>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+          <div class="card-body">
+            <div class="calendar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+$(function() {
+
+    /* Date range picker
+   -----------------------------------------------------------------*/
+
+    var date_range_picker;
+    date_range_picker = function() {
+      $('.date-range-picker').each(function(){
+        $(this).daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            alwaysShowCalendars: true
+        }, function(start, end, tag) {
+          $('.start_hidden').val(start.format('YYYY-MM-DD HH:mm'));
+          $('.end_hidden').val(end.format('YYYY-MM-DD HH:mm'));
+        });
+      })
+    };
+    $(document).on('turbolinks:load', date_range_picker);
+
+
+    /* initialize the calendar
+     -----------------------------------------------------------------*/
+
+    $('.calendar').each(function(){
+      var calendar = $(this);
+
+      calendar.fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay'
+        },
+        height: 700,
+        slotDuration: '00:15:00',
+        scrollTime: '09:00:00',
+        locale: 'fr',
+        defaultView: 'agendaWeek',
+        firstDay: '1',
+        nowIndicator: true,
+        selectable: true,
+        selectHelper: true,
+        editable: true,
+        eventLimit: true,
+        events: '/events.json?building=<%= params[:id] %>',
+
+        select: function(start, end) {
+          $.getScript('/events/new?building=<%= params[:id] %>', function() {
+            $('#event_date_range').val(moment(start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(end).format("MM/DD/YYYY HH:mm"))
+            date_range_picker();
+            $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'));
+            $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
+          });
+
+          calendar.fullCalendar('unselect');
+        },
+
+        eventDrop: function(event, delta, revertFunc) {
+          event_data = {
+            authenticity_token: $('[name="csrf-token"]')[0].content,
+            event: {
+              id: event.id,
+              start_at: event.start.format(),
+              end_at: event.end.format(),
+              color: event.color,
+              room_id: event.room_id
+            }
+          };
+          $.ajax({
+              url: event.update_url,
+              data: event_data,
+              type: 'PATCH'
+          });
+        },
+
+        eventResize: function(event, delta, revertFunc) {
+          event_data = {
+            authenticity_token: $('[name="csrf-token"]')[0].content,
+            event: {
+              id: event.id,
+              start_at: event.start.format(),
+              end_at: event.end.format(),
+              color: event.color,
+              room_id: event.room_id
+            }
+          };
+          $.ajax({
+              url: event.update_url,
+              data: event_data,
+              type: 'PATCH'
+          });
+        },
+
+        eventClick: function(event, jsEvent, view) {
+          $.getScript(event.edit_url, function() {
+            $('#event_date_range').val(moment(event.start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(event.end).format("MM/DD/YYYY HH:mm"))
+            date_range_picker();
+            $('.start_hidden').val(moment(event.start).format('YYYY-MM-DD HH:mm'));
+            $('.end_hidden').val(moment(event.end).format('YYYY-MM-DD HH:mm'));
+          });
+        }
+      });
+    })
+});
+
+</script>
+
+<% end %>

@@ -1,0 +1,16 @@
+$('.calendar').fullCalendar('removeEvents', [<%= @event.id %>]);
+$('.calendar').fullCalendar(
+  'renderEvent',
+  $.parseJSON("<%=j render(@event, format: :json).html_safe %>"),
+  true
+);
+$('.modal').modal('hide');
+
+
+
+<% unless flash.empty? %>
+      <% flash.each do |f| %>
+      <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+       toastr['<%= type %>']('<%= f[1] %>');
+      <% end %>
+ <% end %>

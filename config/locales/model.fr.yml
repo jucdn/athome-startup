@@ -1,0 +1,25 @@
+fr:
+  activerecord: &activerecord
+    models:
+    attributes:
+      user:
+        first_name: Prénom
+        last_name: Nom
+        email: Email
+        phone: Téléphone
+      startup:
+        name: Nom
+        website: Site web
+      role:
+        names:
+          admin: Administrateur
+          founder: Fondateur
+          member: Membre
+    errors:
+      models:
+        user:
+          attributes:
+            phone:
+              invalid: "Ce n'est pas un numéro de téléphone valide"
+  activemodel:
+    <<: *activerecord

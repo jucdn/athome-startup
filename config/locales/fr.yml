@@ -1,0 +1,14 @@
+fr:
+  pundit:
+    default: "Tu n'es pas autorisé à faire cela"
+    event_policy:
+      update?: "Tu ne peux pas modifier la réservation de tes camarades"
+      destroy?: "Tu ne peux pas supprimer la réservation de tes camarades"
+  helpers:
+    submit:
+      user:
+        create: "Add %{model}"
+        update: "Valider"
+      startup:
+        create: "Ajouter %{model}"
+        update: "Valider"

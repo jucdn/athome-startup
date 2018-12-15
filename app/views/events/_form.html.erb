@@ -1,0 +1,20 @@
+<%= simple_form_for @event, remote: true do |f| %>
+  
+  <div class="form-group">
+    <%= f.input :title %>
+    <%= f.input_field :start_at, as: :hidden, value: Date.today, class: 'form-control input-sm start_hidden' %>
+    <%= f.input_field :end_at, as: :hidden, value: Date.today, class: 'form-control input-sm end_hidden' %>
+    <%= f.input_field :user_id, as: :hidden, value: current_user.id, class: 'form-control input-sm user_hidden' %>
+    <%= f.association :room, collection: Room.where(building_id: params[:building]) %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary ml-auto" %>
+    <%= link_to 'Delete',
+                event,
+                method: :delete,
+                class: 'btn btn-danger',
+                data: { confirm: 'Are you sure?' },
+                remote: true unless @event.new_record? %>
+  </div>
+<% end %>

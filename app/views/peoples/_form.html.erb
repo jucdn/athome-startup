@@ -1,0 +1,16 @@
+<%= simple_form_for(@people, :as => @people, :url => people_path) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :first_name, required: true %>
+  <%= f.input :last_name, required: true %>
+  <%= f.input :email, required: true %>
+  <%= f.input :phone %>
+  <%= f.input :title %>
+  <%= f.association :startup %>
+  <%= f.input :facebook %>
+  <%= f.input :instagram %>
+  <%= f.input :twitter %>
+  <%= f.input :linkedin %>
+  <%= f.input :github %>
+  <%= f.input :dribbble %>
+  <%= f.submit class:"btn btn-primary  btn-base-1 mt-4" %>
+<% end %>

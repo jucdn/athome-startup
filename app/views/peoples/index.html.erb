@@ -1,0 +1,84 @@
+<div class="my-3 my-md-5">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">
+        People
+      </h1>
+    </div>
+    <div class="row row-cards">
+      
+      <% @peoples.each do |people| %>
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="media">
+                <span class="avatar avatar-xxl mr-5" style="background-image: url(<%= image_url people.avatar %>)"></span>
+                <div class="media-body">
+                  <h4 class="m-0">
+                    <%= people.name %>
+                    <span style="float:right; position:relative">
+                      <% if policy(people).update? %>
+                        <%= link_to edit_people_path(people) do %>
+                          <i class="fe fe-edit"></i>
+                        <% end %>
+                      <% end %>
+                    </span>
+                  </h4>
+                  <p class="text-muted mb-0">
+                    <%= "#{people.title}" %>
+                    <% if !people.startup.nil? %>
+                      @ <%= people.startup&.name %>
+                    <% end %>
+                  </p>
+                  <ul class="social-links list-inline mb-0 mt-2">
+                    <li class="list-inline-item">
+                      <a href=<%= "slack://user?team=#{people.uid.split('-')[1]}&id=#{people.uid.split('-')[0]}" %> title=<%= "@#{people.nickname}" %> data-toggle="tooltip"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href=<%= "mailto:#{people.email}" %> title=<%= people.email %> data-toggle="tooltip" target="_blank"><i class="fa fa-envelope"></i></a>
+                    </li>
+                    <% if !people.phone.blank? %>
+                      <li class="list-inline-item">
+                        <a href=<%= "tel:#{international_phone(people.phone)}" %> title=<%= "#{international_phone(people.phone)}" %> data-toggle="tooltip" target="_blank"><i class="fa fa-phone"></i></a>
+                      </li>
+                    <% end %>
+                    <% if !people.facebook.blank? %>
+                      <li class="list-inline-item">
+                        <a href=<%= people.facebook %> title=<%= people.facebook %> data-toggle="tooltip" target="_blank"><i class="fa fa-facebook"></i></a>
+                      </li>
+                    <% end %>
+                    <% if !people.instagram.blank? %>
+                      <li class="list-inline-item">
+                        <a href=<%= people.instagram %> title=<%= people.instagram %> data-toggle="tooltip" target="_blank"><i class="fa fa-instagram"></i></a>
+                      </li>
+                    <% end %>
+                    <% if !people.twitter.blank? %>
+                      <li class="list-inline-item">
+                        <a href=<%= people.twitter %> title=<%= people.twitter %> data-toggle="tooltip" target="_blank"><i class="fa fa-twitter"></i></a>
+                      </li>
+                    <% end %>
+                    <% if !people.linkedin.blank? %>
+                      <li class="list-inline-item">
+                        <a href=<%= people.linkedin %> title=<%= people.linkedin %> data-toggle="tooltip" target="_blank"><i class="fa fa-linkedin"></i></a>
+                      </li>
+                    <% end %>
+                    <% if !people.github.blank? %>
+                      <li class="list-inline-item">
+                        <a href=<%= people.github %> title=<%= people.github %> data-toggle="tooltip" target="_blank"><i class="fa fa-github"></i></a>
+                      </li>
+                    <% end %>
+                    <% if !people.dribbble.blank? %>
+                      <li class="list-inline-item">
+                        <a href=<%= people.dribbble %> title=<%= people.dribbble %> data-toggle="tooltip" target="_blank"><i class="fa fa-dribbble"></i></a>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

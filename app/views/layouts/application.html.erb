@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>At Home</title>
+  
+  <%= favicon_link_tag 'favicon.ico' %>
+  <!-- Main css styles -->
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Source+Sans+Pro' %>
+  
+  <!-- Main javascript files -->
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= csrf_meta_tags %>
+  
+</head>
+<body>
+  <div class="page">
+    <div class="page-main">
+      
+      <%= render 'layouts/header' %>
+      
+      <%= render 'layouts/navigation' %>
+    
+      <%= yield %>
+      
+    </div>
+    <%= render 'layouts/footer' %>
+  </div>
+  
+  <div id='remote_container'></div>
+  
+  <%= javascript_include_tag params[:controller] if ::Rails.application.assets.find_asset("#{params[:controller]}.js") %>
+  
+  <%= yield :javascript %>
+  
+  <script type="text/javascript">
+
+  <% unless flash.empty? %>
+    <% flash.each do |f| %>
+      <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+       toastr['<%= type %>']('<%= f[1] %>');
+    <% end %>
+   <% end %>
+
+ 
+     $( document ).on('turbolinks:load', function() {
+       $('[data-toggle="tooltip"]').tooltip()
+     })
+
+
+  </script>
+  
+</body>
+</html>

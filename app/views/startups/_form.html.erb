@@ -1,0 +1,13 @@
+<%= simple_form_for @startup do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name, required: true %>
+  <%= f.input :tagline %>
+  <%= f.input :website %>
+  <%= f.input :facebook %>
+  <%= f.input :instagram %>
+  <%= f.input :twitter %>
+  <%= f.input :description, as: :text %>
+  <%= f.file_field :logo %>
+  <br>
+  <%= f.submit class:"btn btn-primary" %>
+<% end %>

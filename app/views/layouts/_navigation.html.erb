@@ -1,0 +1,33 @@
+<div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg order-lg-first">
+        <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+          <li class="nav-item">
+            <%= link_to(root_path, class: "nav-link #{is_active_controller('home')}") do %>
+              <i class="fe fe-home"></i> Home
+            <% end %>
+          </li>
+          <li class="nav-item dropdown">
+            <a href="javascript:void(0)" class="nav-link <%= is_active_controller('calendar') %>" data-toggle="dropdown"><i class="fe fe-calendar"></i> Calendriers</a>
+            <div class="dropdown-menu dropdown-menu-arrow">
+              <% Building.all.each do |building| %>
+                <%= link_to "#{building.name}", calendar_path(building), class: "dropdown-item" %>
+              <% end %>
+            </div>
+          </li>
+          <li class="nav-item">
+            <%= link_to(peoples_path, class: "nav-link #{is_active_controller('peoples')}") do %>
+              <i class="fe fe-users"></i> People
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to(startups_path, class: "nav-link #{is_active_controller('startups')}") do %>
+              <i class="fa fa-rocket"></i> Startups
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

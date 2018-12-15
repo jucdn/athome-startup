@@ -1,0 +1,71 @@
+<div class="my-3 my-md-5">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">
+        Startups
+      </h1>
+      <div class="page-options d-flex">
+        <% if policy(Startup).new? %>
+          <%= link_to 'Ajouter une Startup', new_startup_path, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row row-cards">
+      
+      <% @startups.each do |startup| %>
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <div class="media">
+                <div class="col-lg-3">
+                  <%= image_tag startup.logo, class: "mr-3" rescue nil %>
+                </div>
+                
+                <div class="media-body">
+                  <h4 class="m-0">
+                    <%= startup.name %>
+                    <span style="float:right; position:relative">
+                      <% if policy(startup).update? %>
+                        <%= link_to edit_startup_path(startup) do %>
+                          <i class="fe fe-edit"></i>
+                        <% end %>
+                      <% end %>
+                      <% if policy(startup).destroy? %>
+                        <%= link_to startup, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                          <i class="fe fe-trash"></i>
+                        <% end %>
+                      <% end %>
+                    </span>
+                  </h4>
+                  <p class="text-muted mb-0"><%= startup.tagline %></p>
+                  <ul class="social-links list-inline mb-0 mt-2">
+                    <% if !startup.website.blank? %>
+                      <li class="list-inline-item">
+                        <a href=<%= startup.website %> title=<%= startup.website %> data-toggle="tooltip" target="_blank"><i class="fa fa-link"></i></a>
+                      </li>
+                    <% end %>
+                    <% if !startup.facebook.blank? %>
+                      <li class="list-inline-item">
+                        <a href=<%= startup.facebook %> title=<%= startup.facebook %> data-toggle="tooltip" target="_blank"><i class="fa fa-facebook"></i></a>
+                      </li>
+                    <% end %>
+                    <% if !startup.instagram.blank? %>
+                      <li class="list-inline-item">
+                        <a href=<%= startup.instagram %> title=<%= startup.instagram %> data-toggle="tooltip" target="_blank"><i class="fa fa-instagram"></i></a>
+                      </li>
+                    <% end %>
+                    <% if !startup.twitter.blank? %>
+                      <li class="list-inline-item">
+                        <a href=<%= startup.twitter %> title=<%= startup.twitter %> data-toggle="tooltip" target="_blank"><i class="fa fa-twitter"></i></a>
+                      </li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
