@@ -1,3 +1,4 @@
+.DS_Store
 *.rbc
 capybara-*.html
 .rspec
@@ -20,7 +21,6 @@ config/master.key
 # config/secrets.yml
 
 # dotenv
-# TODO Comment out this rule if environment variables can be committed
 .env
 
 ## Environment normalization:
@@ -47,3 +47,5 @@ bower.json
 # Ignore node_modules
 node_modules/
 
+# Ignore storage
+storage/*
