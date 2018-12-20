@@ -7,7 +7,7 @@ gem 'i18n'
 gem 'devise-i18n'
 
 gem 'bootstrap', '~> 4.1.1'
-gem 'tabler-rubygem'
+gem 'tabler-rubygem', :git => 'https://github.com/jucdn/tabler-rubygem.git'
 
 gem 'font-awesome-rails'
 
