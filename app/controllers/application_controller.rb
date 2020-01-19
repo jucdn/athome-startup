@@ -4,8 +4,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   after_action :verify_authorized, except: :index, unless: :devise_controller?
-  before_filter :redirect_to_prefered_host
-  
+  before_action :redirect_to_prefered_host
   before_action :authenticate_user!
   before_action :set_raven_context
 
