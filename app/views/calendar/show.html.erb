@@ -28,6 +28,29 @@
               <% end %>
             <% end %>
           </div>
+          <div class="icals ml-auto">
+            <div class="dropdown d-none d-md-flex">
+                  <a class="nav-link icon" data-toggle="dropdown">
+                    <button type="button" class="btn btn-secondary dropdown-toggle">
+                       <i class="fe fe-calendar mr-2"></i>Ajouter à votre calendrier
+                    </button>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" style="white-space: nowrap">
+                    <div class="card-header">
+                      <h3 class="card-title">Ajoutez ce lien à votre calendrier</h3>
+                    </div>
+                    <div class="card-body">
+                      <% @rooms.each do |room| %>
+                        <div class="form-group" style="white-space: nowrap">
+                          <label class="form-label"><%= room.name %></label>
+                          <input type="text" class="form-control" name="example-disabled-input" placeholder="Disabled.." value="<%= ENV['DOMAIN_NAME'] %>/ical/<%= room.hid %>.ics" readonly="">
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+            
+          </div>
         </div>
           <div class="card-body">
             <div class="calendar"></div>

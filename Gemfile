@@ -55,6 +55,8 @@ gem 'simple_form'
 
 gem 'sentry-raven'
 
+gem 'icalendar'
+
 group :development, :test do
   gem 'dotenv-rails'
 end

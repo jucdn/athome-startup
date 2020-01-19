@@ -6,6 +6,7 @@ Myapp::Application.routes.draw do
 
   resources :events
   resources :calendar, only: :show
+  resources :ical, only: :show
   resources :peoples, only: [:index, :edit, :update]
   resources :startups
 
