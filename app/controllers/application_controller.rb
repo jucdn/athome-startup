@@ -31,8 +31,8 @@ class ApplicationController < ActionController::Base
     end
 
     def redirect_to_prefered_host
-      if Rails.env.production? && request.host != PREFERED_HOST
-        redirect_to(:host => PREFERED_HOST)
+      if Rails.env.production? && request.host != ENV['DOMAIN_NAME']
+        redirect_to(:host => ENV['DOMAIN_NAME'])
       end
     end
     
