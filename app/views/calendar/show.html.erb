@@ -43,7 +43,7 @@
                       <% @rooms.each do |room| %>
                         <div class="form-group" style="white-space: nowrap">
                           <label class="form-label"><%= room.name %></label>
-                          <input type="text" class="form-control" name="example-disabled-input" placeholder="Disabled.." value="<%= ENV['DOMAIN_NAME'] %>/ical/<%= room.hid %>.ics" readonly="">
+                          <input type="text" class="form-control" name="example-disabled-input" placeholder="Disabled.." value="https://<%= ENV['DOMAIN_NAME'] %>/ical/<%= room.hid %>.ics" readonly="">
                         </div>
                       <% end %>
                     </div>
