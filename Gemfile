@@ -47,7 +47,7 @@ gem 'forest_liana'
 
 gem 'activerecord-session_store'
 
-gem 'sprockets'
+gem 'sprockets-rails', '2.3.3'
 
 gem 'jquery-rails'
 
