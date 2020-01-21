@@ -13,18 +13,16 @@
             <% @rooms.each do |room| %>
               <% if room.color == 'black' %>
                 <span class="tag tag-gray-dark"><%= room.name %></span>
-              <% end %>
-              <% if room.color == 'green' %>
+              <% elsif room.color == 'green' %>
                 <span class="tag tag-green"><%= room.name %></span>
-              <% end %>
-              <% if room.color == 'red' %>
+              <% elsif room.color == 'red' %>
                 <span class="tag tag-danger"><%= room.name %></span>
-              <% end %>
-              <% if room.color == 'orange' %>
+              <% elsif room.color == 'orange' %>
                 <span class="tag tag-warning"><%= room.name %></span>
-              <% end %>
-              <% if room.color == 'blue' %>
+              <% elsif room.color == 'blue' %>
                 <span class="tag tag-blue"><%= room.name %></span>
+              <% else %>
+                <span class="tag" style="color: white; background-color: <%= room.color %>"><%= room.name %></span>
               <% end %>
             <% end %>
           </div>
@@ -43,7 +41,7 @@
                       <% @rooms.each do |room| %>
                         <div class="form-group" style="white-space: nowrap">
                           <label class="form-label"><%= room.name %></label>
-                          <input type="text" class="form-control" name="example-disabled-input" placeholder="Disabled.." value="<%= ENV['DOMAIN_NAME'] %>/ical/<%= room.hid %>.ics" readonly="">
+                          <input type="text" class="form-control" name="example-disabled-input" placeholder="Disabled.." value="https://<%= ENV['DOMAIN_NAME'] %>/ical/<%= room.hid %>.ics" readonly="">
                         </div>
                       <% end %>
                     </div>
