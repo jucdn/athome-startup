@@ -232,9 +232,9 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     rdoc (6.2.1)
-    responders (3.0.0)
-      actionpack (>= 5.0)
-      railties (>= 5.0)
+    responders (2.4.0)
+      actionpack (>= 4.2.0, < 5.3)
+      railties (>= 4.2.0, < 5.3)
     rolify (5.2.0)
     rotp (5.1.0)
       addressable (~> 2.5)
@@ -306,6 +306,7 @@ DEPENDENCIES
   phonelib
   pundit
   rails (= 5.2.1)
+  responders (= 2.4.0)
   rolify
   sass-rails
   sdoc
