@@ -49,6 +49,7 @@ gem 'activerecord-session_store'
 
 gem 'sprockets-rails', '2.3.3'
 gem 'responders', '2.4.0'
+gem 'groupdate', '4.1.0'
 
 gem 'jquery-rails'
 
