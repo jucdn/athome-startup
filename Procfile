@@ -1,2 +1,2 @@
-web: bundle exec puma
+web: bin/rails server -p $PORT -e $RAILS_ENV
 worker: bundle exec sidekiq -e production
