@@ -38,7 +38,7 @@ gem 'jbuilder'
 gem 'sidekiq', '~>6.0.0'
 gem 'sidekiq-status'
 
-gem 'devise'
+gem 'devise', '4.7.1'
 #gem 'omniauth-slack'
 gem 'omniauth-slack', :git => 'https://github.com/ginjo/omniauth-slack.git', :branch => 'features-and-fixes'
 
