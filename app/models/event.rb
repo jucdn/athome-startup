@@ -22,6 +22,6 @@ class Event < ActiveRecord::Base
   end
   
   def event_reminder
-    SlackBot.new(self.user.uid.split('-')[0]).message("Hello, tu as réservé la salle #{self.room.name} pour #{self.title}.\nSi tu ne l'utiles pas, pense à annuler la réservation ici : <https://#{ENV['DOMAIN_NAME']}|annuler>").deliver
+    SlackBot.new(self.user.uid.split('-')[0]).message("Hello, tu as réservé la salle #{self.room.name} pour #{self.title}.\nSi tu ne l'utilises pas, pense à annuler la réservation ici : <https://#{ENV['DOMAIN_NAME']}|annuler>").deliver
   end
 end
