@@ -5,6 +5,8 @@ ruby '2.5.1'
 
 gem 'rails', '5.2.1'
 
+gem 'puma', '~> 3.0'
+
 gem 'i18n'
 gem 'devise-i18n'
 
