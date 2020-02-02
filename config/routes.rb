@@ -12,6 +12,11 @@ Myapp::Application.routes.draw do
 
   root to: 'home#index'
   
+  require 'sidekiq/web'
+  authenticate :user, lambda { |u| u.is_admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+  
   get "/404", to: "errors#not_found"
   get "/500", to: "errors#internal_error"
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_14_152127) do
+ActiveRecord::Schema.define(version: 2020_02_01_173957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2019_07_14_152127) do
     t.datetime "updated_at"
     t.integer "user_id"
     t.integer "room_id"
+    t.string "reminder_job_id"
     t.index ["room_id"], name: "index_events_on_room_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
