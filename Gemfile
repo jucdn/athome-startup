@@ -61,6 +61,10 @@ gem 'sentry-raven'
 
 gem 'icalendar'
 
+# Pagination
+gem 'kaminari'
+gem 'kaminari-i18n'
+
 group :development, :test do
   gem 'dotenv-rails'
 end
