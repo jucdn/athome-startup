@@ -5,7 +5,7 @@ ruby '2.5.1'
 
 gem 'rails', '5.2.4.1'
 
-gem 'puma', '~> 3.0'
+gem 'puma', '~> 3.12'
 
 gem 'i18n'
 gem 'devise-i18n'

@@ -215,7 +215,7 @@ GEM
     phonelib (0.6.27)
     popper_js (1.14.5)
     public_suffix (4.0.3)
-    puma (3.12.2)
+    puma (3.12.4)
     pundit (2.0.0)
       activesupport (>= 3.0.0)
     rack (2.1.2)
@@ -333,7 +333,7 @@ DEPENDENCIES
   omniauth-slack!
   pg
   phonelib
-  puma (~> 3.0)
+  puma (~> 3.12)
   pundit
   rails (= 5.2.4.1)
   rolify
