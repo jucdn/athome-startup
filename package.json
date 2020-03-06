@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "@fullcalendar/bootstrap": "^4.4.0",
+    "@fullcalendar/core": "^4.4.0",
+    "@fullcalendar/daygrid": "^4.4.0",
+    "@fullcalendar/interaction": "^4.4.0",
+    "@fullcalendar/resource-timegrid": "^4.4.0",
+    "@fullcalendar/resource-timeline": "^4.4.0",
+    "@fullcalendar/timegrid": "^4.4.0",
+    "@popperjs/core": "^2.1.0",
+    "@rails/webpacker": "4.2.2"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.10.3"
+  }
+}

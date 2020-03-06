@@ -7,6 +7,7 @@ json.end event.end_at.strftime(date_format)
 
 json.color event.room.color unless event.room.color.blank?
 json.room_id event.room.id
+json.resourceId event.room.id
 json.allDay event.all_day_event? ? true : false
 
 json.update_url event_path(event, method: :patch)

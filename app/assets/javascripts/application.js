@@ -19,10 +19,18 @@
 //= require metisMenu/jquery.metisMenu.js
 //= require pace/pace.min.js
 //= require slimscroll/jquery.slimscroll.min.js
-//= require fullcalendar/moment.min.js
-//= require fullcalendar/fullcalendar.min.js
-//= require fullcalendar/lang/fr
 //= require daterangepicker
+//= require @fullcalendar/core
+//= require @fullcalendar/daygrid
+//= require @fullcalendar/timegrid
+//= require @fullcalendar/bootstrap
+//= require @fullcalendar/interaction
+//= require @fullcalendar/timeline
+//= require @fullcalendar/core/locales/fr
+//= require @fullcalendar/resource-common
+//= require @fullcalendar/resource-timeline
+//= require @fullcalendar/resource-daygrid
+//= require @fullcalendar/resource-timegrid
 //= require toastr/toastr.min.js
 //= require_tree .
 

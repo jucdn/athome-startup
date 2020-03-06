@@ -7,6 +7,9 @@ gem 'rails', '6.0.2.1'
 
 gem 'puma', '~> 3.0'
 
+# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+gem 'webpacker', '~> 4.0'
+
 gem 'i18n'
 gem 'devise-i18n'
 

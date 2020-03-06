@@ -1,4 +1,4 @@
-$('.calendar').fullCalendar('removeEvents', [<%= @event.id %>])
+calendar.getEventById(<%= @event.id %>).remove();
 $('.modal').modal('hide');
 
 

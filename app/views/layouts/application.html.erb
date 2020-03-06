@@ -16,7 +16,10 @@
   <%= csrf_meta_tags %>
   
 </head>
-<body>
+<body 
+  <% if content_for?(:body_attributes) %>
+    <%= yield(:body_attributes) %> 
+  <% end %>>
   <div class="page">
     <div class="page-main">
       

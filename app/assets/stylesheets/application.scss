@@ -1,15 +1,23 @@
-@import "fullcalendar/fullcalendar.css";
 @import "daterangepicker";
 @import "font-awesome";
 @import "toastr/toastr.min.css";
 @import "animate/animate.css";
-
+@import "@fullcalendar/core/main.min.css";
+@import "@fullcalendar/bootstrap/main.min.css";
+@import "@fullcalendar/timegrid/main.min.css";
+@import "@fullcalendar/daygrid/main.min.css";
+@import "@fullcalendar/timeline/main.min.css";
+@import "@fullcalendar/resource-timeline/main.min.css";
 @import "tabler/variables";
 @import "bootstrap";
 @import "tabler";
 @import "tabler.plugins"; // optional
 @import "tabler.icons"; // optional includes [browser, flag, payments]
 
-.fc-content{
+.fc-event-container .fc-title{
+	color: #fff !important;
+}
+
+.fc-event-container .fc-time{
 	color: #fff !important;
 }

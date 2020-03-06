@@ -51,7 +51,7 @@
           </div>
         </div>
           <div class="card-body">
-            <div class="calendar"></div>
+            <div id="calendar" class="calendar"></div>
           </div>
         </div>
       </div>
@@ -59,116 +59,104 @@
   </div>
 </div>
 
+<% content_for(:body_attributes) do %>
+   data-turbolinks="false"
+<% end %>
 
 <% content_for :javascript do %>
 
 <script type="text/javascript">
+  
+  document.addEventListener('turbolinks:load', function() {
+    var calendarEl = document.getElementById('calendar');
 
-$(function() {
-
-    /* Date range picker
-   -----------------------------------------------------------------*/
-
-    var date_range_picker;
-    date_range_picker = function() {
-      $('.date-range-picker').each(function(){
-        $(this).daterangepicker({
-            timePicker: true,
-            timePickerIncrement: 30,
-            alwaysShowCalendars: true
-        }, function(start, end, tag) {
-          $('.start_hidden').val(start.format('YYYY-MM-DD HH:mm'));
-          $('.end_hidden').val(end.format('YYYY-MM-DD HH:mm'));
+    window.calendar = new FullCalendar.Calendar(calendarEl, {
+      schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source',
+      plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'resourceTimeline', 'resourceTimeGrid' ],
+      header: {
+        left: 'prev,next today',
+        center: 'title',
+        right: 'resourceTimeGrid,timeGridWeek'
+      },
+      buttonText: {
+        resourceTimeGrid: 'Jour',
+      },
+      height: 700,
+      slotDuration: '00:15:00',
+      scrollTime: '09:00:00',
+      locale: 'fr',
+      timeZone: 'UTC',
+      defaultView: 'resourceTimeGrid',
+      datesAboveResources: true,
+      resources: '/calendar/<%= params[:id] %>.json',
+      resourceLabelText: 'Salles',
+      resourceAreaWidth: '20%',
+      slotWidth: 22,
+      firstDay: '1',
+      nowIndicator: true,
+      selectable: true,
+      selectHelper: true,
+      editable: true,
+      eventLimit: true,
+      events: '/events.json?building=<%= params[:id] %>',
+      
+      
+      select: function(info) {
+        $.getScript('/events/new?building=<%= params[:id] %>', function() {
+          $('#event_room_id').val(info.resource === undefined ? null : info.resource.id);
+          $('.start_hidden').val(info.startStr);
+          $('.end_hidden').val(info.endStr);
         });
-      })
-    };
-    $(document).on('turbolinks:load', date_range_picker);
+      },
 
+      eventDrop: function(info) {
+        event_data = {
+          authenticity_token: $('[name="csrf-token"]')[0].content,
+          event: {
+            id: info.event.id,
+            start_at: info.event.start,
+            end_at: info.event.end,
+            color: info.event.extendedProps.color,
+            room_id: info.event.getResources()[0].id
+          }
+        };
+        $.ajax({
+            url: info.event.extendedProps.update_url,
+            data: event_data,
+            dataType: 'script',
+            type: 'PATCH'
+        });
+      },
 
-    /* initialize the calendar
-     -----------------------------------------------------------------*/
-
-    $('.calendar').each(function(){
-      var calendar = $(this);
-
-      calendar.fullCalendar({
-        header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay'
-        },
-        height: 700,
-        slotDuration: '00:15:00',
-        scrollTime: '09:00:00',
-        locale: 'fr',
-        defaultView: 'agendaWeek',
-        firstDay: '1',
-        nowIndicator: true,
-        selectable: true,
-        selectHelper: true,
-        editable: true,
-        eventLimit: true,
-        events: '/events.json?building=<%= params[:id] %>',
-
-        select: function(start, end) {
-          $.getScript('/events/new?building=<%= params[:id] %>', function() {
-            $('#event_date_range').val(moment(start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(end).format("MM/DD/YYYY HH:mm"))
-            date_range_picker();
-            $('.start_hidden').val(moment(start).format('YYYY-MM-DD HH:mm'));
-            $('.end_hidden').val(moment(end).format('YYYY-MM-DD HH:mm'));
-          });
-
-          calendar.fullCalendar('unselect');
-        },
-
-        eventDrop: function(event, delta, revertFunc) {
-          event_data = {
-            authenticity_token: $('[name="csrf-token"]')[0].content,
-            event: {
-              id: event.id,
-              start_at: event.start.format(),
-              end_at: event.end.format(),
-              color: event.color,
-              room_id: event.room_id
-            }
-          };
-          $.ajax({
-              url: event.update_url,
-              data: event_data,
-              type: 'PATCH'
-          });
-        },
-
-        eventResize: function(event, delta, revertFunc) {
-          event_data = {
-            authenticity_token: $('[name="csrf-token"]')[0].content,
-            event: {
-              id: event.id,
-              start_at: event.start.format(),
-              end_at: event.end.format(),
-              color: event.color,
-              room_id: event.room_id
-            }
-          };
-          $.ajax({
-              url: event.update_url,
-              data: event_data,
-              type: 'PATCH'
-          });
-        },
-
-        eventClick: function(event, jsEvent, view) {
-          $.getScript(event.edit_url, function() {
-            $('#event_date_range').val(moment(event.start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(event.end).format("MM/DD/YYYY HH:mm"))
-            date_range_picker();
-            $('.start_hidden').val(moment(event.start).format('YYYY-MM-DD HH:mm'));
-            $('.end_hidden').val(moment(event.end).format('YYYY-MM-DD HH:mm'));
-          });
-        }
-      });
-    })
-});
-
+      eventResize: function(info) {
+        event_data = {
+          authenticity_token: $('[name="csrf-token"]')[0].content,
+          event: {
+            id: info.event.id,
+            start_at: info.event.start,
+            end_at: info.event.end,
+            color: info.event.extendedProps.color,
+            room_id: info.event.extendedProps.room_id
+          }
+        };
+        $.ajax({
+            url: info.event.extendedProps.update_url,
+            data: event_data,
+            dataType: 'script',
+            type: 'PATCH'
+        });
+      },
+      eventClick: function(info) {
+        $.getScript(info.event.extendedProps.edit_url, function() {
+          $('.start_hidden').val(info.event.start);
+          $('.end_hidden').val(info.event.end);
+        });
+      }
+    });
+    
+    
+    calendar.render();
+  });
 </script>
 
 <% end %>
