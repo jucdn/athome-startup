@@ -10,6 +10,11 @@ fr:
       startup:
         name: Nom
         website: Site web
+      perk:
+        name: Nom
+        description: Description
+        offer: Offre
+        url: Site web
       role:
         names:
           admin: Administrateur

@@ -26,6 +26,11 @@
               <i class="fa fa-rocket"></i> Startups
             <% end %>
           </li>
+          <li class="nav-item">
+            <%= link_to(perks_path, class: "nav-link #{is_active_controller('perks')}") do %>
+              <i class="fe fe-shopping-cart"></i> Perks
+            <% end %>
+          </li>
         </ul>
       </div>
     </div>

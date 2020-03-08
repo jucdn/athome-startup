@@ -9,6 +9,7 @@ Myapp::Application.routes.draw do
   resources :ical, only: :show
   resources :peoples, only: [:index, :edit, :update]
   resources :startups
+  resources :perks
 
   root to: 'home#index'
   
