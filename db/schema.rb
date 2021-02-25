@@ -36,22 +36,22 @@ ActiveRecord::Schema.define(version: 2020_03_08_102022) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "buildings", id: :serial, force: :cascade do |t|
+  create_table "buildings", force: :cascade do |t|
     t.string "name"
     t.string "city"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "events", id: :serial, force: :cascade do |t|
+  create_table "events", force: :cascade do |t|
     t.string "title"
     t.datetime "start_at"
     t.datetime "end_at"
     t.string "color"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer "user_id"
-    t.integer "room_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "room_id"
     t.string "reminder_job_id"
     t.index ["room_id"], name: "index_events_on_room_id"
     t.index ["user_id"], name: "index_events_on_user_id"
@@ -76,21 +76,21 @@ ActiveRecord::Schema.define(version: 2020_03_08_102022) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
-  create_table "rooms", id: :serial, force: :cascade do |t|
+  create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.string "color"
-    t.integer "building_id"
+    t.bigint "building_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "hid"
     t.index ["building_id"], name: "index_rooms_on_building_id"
   end
 
-  create_table "sessions", id: :serial, force: :cascade do |t|
+  create_table "sessions", force: :cascade do |t|
     t.string "session_id", null: false
     t.text "data"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_102022) do
     t.string "twitter"
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

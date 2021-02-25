@@ -256,7 +256,17 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :slack, ENV['SLACK_APP_ID'], ENV['SLACK_APP_SECRET'], scope: 'identity.basic,identity.email,identity.avatar,identity.team'
+  config.omniauth :slack, ENV['SLACK_APP_ID'], ENV['SLACK_APP_SECRET'],
+    scope: 'identity.basic identity.email identity.avatar identity.team',
+    team: ENV['SLACK_TEAM_ID'],
+    client_options: {
+      site: 'https://slack.com',
+      authorize_url: '/oauth/authorize',
+      token_url: '/api/oauth.access',
+      auth_scheme: :basic_auth,
+      raise_errors: false, # MUST be false to allow Slack's get-token response from v2 API.
+      history: Array.new,
+    }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

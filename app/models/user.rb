@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   rolify
   after_create :assign_default_role
   belongs_to :startup
-  
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -19,8 +19,6 @@ class User < ActiveRecord::Base
 
   def self.find_for_slack_oauth(auth)
 
-    puts auth.info.to_json
-
     registered_user = User.where(:uid => auth.uid).first
     unless registered_user.nil?
       # registered_user.name = auth.info.name if registered_user.name == nil
@@ -32,17 +30,18 @@ class User < ActiveRecord::Base
     else
 
       if !auth.info.deleted && !auth.info.is_restricted && auth.info.team_id == ENV['SLACK_TEAM_ID']
+        puts auth.to_hash
+        puts "---------------"
         user = User.new
-        user.first_name = auth.info.first_name
-        user.last_name = auth.info.last_name
-        if auth.info.email.nil?
-          user.email = auth.info.nickname+"@athome-startup.fr"
+        user.first_name = auth.info.user.name
+        if auth.info.user.email.nil?
+          user.email = auth.info.user.name+"@athome-startup.fr"
         else
-          user.email = auth.info.email
+          user.email = auth.info.user.email
         end
-        user.avatar = auth.info.image
+        user.avatar = auth.info.user.image_512
         user.uid = auth.uid
-        user.nickname = auth.info.nickname
+        user.nickname = auth.info.user.name
         user.provider = auth.provider
         user.password = Devise.friendly_token[0,20]
         # user.skip_confirmation!

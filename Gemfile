@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-ruby '2.5.1'
+ruby '2.7.2'
 
 gem 'rails', '6.0.2.1'
 
@@ -42,8 +42,9 @@ gem 'sidekiq', '~>6.0.0'
 gem 'sidekiq-status'
 
 gem 'devise', '4.7.1'
+
 #gem 'omniauth-slack'
-gem 'omniauth-slack', :git => 'https://github.com/ginjo/omniauth-slack.git', :branch => 'features-and-fixes'
+gem 'ginjo-omniauth-slack', require:'omniauth-slack'
 
 gem "rolify"
 gem "pundit"
