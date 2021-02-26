@@ -1,0 +1,29 @@
+<div class="my-3 my-md-5">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">
+        <%= plural_table_name.titleize %>
+      </h1>
+      <div class="page-options d-flex">
+        <div class="btn-list">
+          <%%= link_to 'Modifier', edit_<%= singular_table_name %>_path(@<%= singular_table_name %>), class: "btn btn-primary" %>
+          <%%= link_to 'Retour', <%= index_helper %>_path, class: "btn btn-secondary" %>
+        </div>
+      </div>
+    </div>
+    <% attributes.reject(&:password_digest?).each do |attribute| -%>
+      <p>
+      <strong><%= attribute.human_name %>:</strong>
+      <% if attribute.attachment? -%>
+        <%%= link_to @<%= singular_table_name %>.<%= attribute.column_name %>.filename, @<%= singular_table_name %>.<%= attribute.column_name %> if @<%= singular_table_name %>.<%= attribute.column_name %>.attached? %>
+      <% elsif attribute.attachments? -%>
+        <%% @<%= singular_table_name %>.<%= attribute.column_name %>.each do |<%= attribute.singular_name %>| %>
+          <div><%%= link_to <%= attribute.singular_name %>.filename, <%= attribute.singular_name %> %></div>
+        <%% end %>
+      <% else -%>
+        <%%= @<%= singular_table_name %>.<%= attribute.column_name %> %>
+      <% end -%>
+      </p>
+    <% end -%>
+  </div>
+</div>
