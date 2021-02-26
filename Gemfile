@@ -13,7 +13,7 @@ gem 'webpacker', '~> 4.0'
 gem 'i18n'
 gem 'devise-i18n'
 
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap', '~> 4.3.1'
 gem 'tabler-rubygem', :git => 'https://github.com/jucdn/tabler-rubygem.git'
 
 gem 'font-awesome-rails'
