@@ -38,7 +38,7 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 
-gem 'sidekiq', '~>6.0.0'
+gem 'sidekiq', '~>6.2.1'
 gem 'sidekiq-status'
 
 gem 'devise', '4.7.1'
