@@ -243,7 +243,8 @@ GEM
     phonelib (0.6.48)
     popper_js (1.16.0)
     public_suffix (4.0.6)
-    puma (3.12.6)
+    puma (4.3.12)
+      nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     racc (1.5.2)
@@ -393,7 +394,7 @@ DEPENDENCIES
   kaminari-i18n
   pg
   phonelib
-  puma (~> 3.0)
+  puma (~> 4.3)
   pundit
   rails (= 6.0.2.1)
   rolify
